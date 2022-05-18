@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,45 +14,32 @@
 </head>
 <body>
 	
-	<my:navBar currentPage="list"></my:navBar>
-	
-	<%-- 글 목록 --%>
+	<my:navBar currentPage="insert"></my:navBar>
 	
 	<div class="container">
-		<div class="row">
-			<div class="col">
-				
-				<h1>글 목록</h1>
+		<div class="col">
+			<div class="row">
 			
-				<table class="table">
-					<thead>
-						<tr>
-							<th>글번호</th>
-							<th>제목</th>
-							<th>작성시간</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${boardList }" var="board">			
-							<tr>
-								<td>${board.id }</td>
-								<td>
-									<a href="${appRoot }/ex01/board/${board.id }">${board.title }</a>
-									<c:if test="${board.numOfReply > 0}">
-										[${board.numOfReply }]
-									</c:if>
-								</td>
-								<td>${board.prettyInserted }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+				<h1>글 쓰기</h1>
 				
+				<form action="${appRoot }/ex01/board/insert" method="post">
+					<div>
+						<label for="input1" class="form-label">제목</label>
+						<input id="input1" class="form-control" type="text" required 
+						 name="title"/>
+					</div>
+					<div>
+						<label for="textarea1" class="form-label">본문</label>
+						<textarea id="textarea1" class="form-control" rows="10" cols="30" 
+						name="body" ></textarea> 
+					</div>
+					<button class="btn btn-primary justify-content-right">작성</button>
+				</form>
+								
 			</div>
 		</div>
 	</div>
 	
-	<my:pagination path="/ex01/board/list"></my:pagination>
 	
 </body>
 </html>
